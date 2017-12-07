@@ -56,4 +56,11 @@
 	<email>trump@trump.com</email>
 	<notes>Bad Hombre</notes>
 </contact>
+<contact>
+	<first_name>Close</first_name>
+	<last_name>TestingCLose</last_name>
+	<phone_number>5555</phone_number>
+	<email>test@testing.com</email>
+	<notes>This is working fine! </notes>
+</contact>
 </contacts>

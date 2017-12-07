@@ -4,6 +4,9 @@ import javafx.beans.property.SimpleStringProperty;
 
 
 public class Contact {
+    // SimpleStringProperty are required so that the Contact class fields work with the Cell factories.
+    // Cell factories are implemented by using the PropertyValueFactory class, which uses the firstName, lastName
+    // etc  properties of the table columns as references to the corresponding methods of the Person class.
     private final SimpleStringProperty firstName;
     private final SimpleStringProperty lastName;
     private final SimpleStringProperty phoneNumber;
@@ -11,7 +14,7 @@ public class Contact {
     private final SimpleStringProperty notes;
 
     //Constructor,  package-private (no explicit modifier).
-     Contact() {
+    Contact() {
         this.firstName = new SimpleStringProperty("");
         this.lastName = new SimpleStringProperty("");
         this.email = new SimpleStringProperty("");
@@ -20,7 +23,7 @@ public class Contact {
     }
 
 
-     public Contact(String firstName, String lastName, String phoneNumber, String email, String notes) {
+    public Contact(String firstName, String lastName, String phoneNumber, String email, String notes) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.email = new SimpleStringProperty(email);
@@ -32,9 +35,10 @@ public class Contact {
         return firstName.get();
     }
 
-/*    public SimpleStringProperty firstNameProperty() {
+    /*public SimpleStringProperty firstNameProperty() {
         return firstName;
     }*/
+
 
     public void setFirstName(String firstName) {
         this.firstName.set(firstName);

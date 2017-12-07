@@ -10,43 +10,47 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainLayoutVBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mycontacts.Controller">
+<VBox fx:id="mainLayoutVBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="mycontacts.Controller">
 
-        <Label text="Address Book">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-        </Label>
-      <MenuBar>
+    <Label text="Address Book">
+        <font>
+            <Font name="System Bold" size="15.0"/>
+        </font>
+    </Label>
+    <MenuBar>
 
-          <Menu  text="File">
-              <MenuItem  text="Close" />
-          </Menu>
-          <Menu  text="Edit">
-                  <MenuItem  onAction="#handleMenuAdd" text="Add" />
-                  <MenuItem text="Edit" />
-              <MenuItem onAction="#handleMenuDelete" text="Delete" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-              <MenuItem mnemonicParsing="false" text="About" />
-          </Menu>
+        <Menu text="File">
+            <MenuItem text="Close" onAction="#handleMenuClose"/>
+        </Menu>
+        <Menu text="Edit">
+            <MenuItem text="Add" onAction="#handleMenuAdd"/>
+            <MenuItem text="Edit"/>
+            <MenuItem text="Delete" onAction="#handleMenuDelete"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About"/>
+        </Menu>
 
-      </MenuBar>
-        <TableView fx:id="contactsTableView" editable="true">
-            <columns>
-                <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" />
-                <TableColumn fx:id="lastNameColumn" prefWidth="100" text="Last Name" />
-                <TableColumn fx:id="phoneNumberColumn" prefWidth="130" text="Phone Number" />
-                <TableColumn fx:id="emailColumn" prefWidth="230" text="eMail" />
-                <TableColumn fx:id="notesColumn" prefWidth="250" text="Notes" />
-            </columns>
-         <contextMenu>
+    </MenuBar>
+    <TableView fx:id="contactsTableView" editable="true">
+        <columns>
+            <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name"/>
+            <TableColumn fx:id="lastNameColumn" prefWidth="100" text="Last Name"/>
+            <TableColumn fx:id="phoneNumberColumn" prefWidth="130" text="Phone Number"/>
+            <TableColumn fx:id="emailColumn" prefWidth="230" text="eMail"/>
+            <TableColumn fx:id="notesColumn" prefWidth="250" text="Notes"/>
+        </columns>
+        <contextMenu>
             <ContextMenu>
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleContextMenuDelete" text="Delete" />
-              </items>
+                <items>
+                    <MenuItem text="Delete" onAction="#handleContextMenuDelete"/>
+                </items>
+                <items>
+                    <MenuItem text="Add Contact" onAction="#handleContextMenuAdd"/>
+                </items>
             </ContextMenu>
-         </contextMenu>
-        </TableView>
+        </contextMenu>
+    </TableView>
 
 </VBox>

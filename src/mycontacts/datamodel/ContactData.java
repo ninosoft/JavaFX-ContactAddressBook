@@ -20,7 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-
+//Singleton Class
 public class ContactData {
 
     private static final String CONTACTS_FILE = "contacts.xml";
@@ -36,10 +36,12 @@ public class ContactData {
 
     //Singleton , single instance
     private static ContactData instance = new ContactData();
+
     //private constructor, required for singleton class.
     private ContactData() {
         contacts = FXCollections.observableArrayList();
     }
+
     //method to get the single instance. Required for singleton class.
     public static ContactData getInstance() {
         return instance;
@@ -123,11 +125,9 @@ public class ContactData {
                     }
                 }
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             //e.printStackTrace();
-        }
-        catch (XMLStreamException e) {
+        } catch (XMLStreamException e) {
             e.printStackTrace();
         }
     }
@@ -153,7 +153,7 @@ public class ContactData {
             eventWriter.add(contactsStartElement);
             eventWriter.add(end);
 
-            for (Contact contact: contacts) {
+            for (Contact contact : contacts) {
                 saveContact(eventWriter, eventFactory, contact);
             }
 
@@ -161,19 +161,17 @@ public class ContactData {
             eventWriter.add(end);
             eventWriter.add(eventFactory.createEndDocument());
             eventWriter.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Problem with Contacts file: " + e.getMessage());
             e.printStackTrace();
-        }
-        catch (XMLStreamException e) {
+        } catch (XMLStreamException e) {
             System.out.println("Problem writing contact: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     private void saveContact(XMLEventWriter eventWriter, XMLEventFactory eventFactory, Contact contact)
-            throws  XMLStreamException {
+            throws XMLStreamException {
 
         XMLEvent end = eventFactory.createDTD("\n");
 

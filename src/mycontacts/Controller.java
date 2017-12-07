@@ -1,10 +1,12 @@
 package mycontacts;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+
 import mycontacts.datamodel.Contact;
 import mycontacts.datamodel.ContactData;
 
@@ -33,33 +35,15 @@ public class Controller {
 
     public void initialize() {
 
-/*  Test Data 1
 
-       //test contacts data without using dataModel ContactData class.
-        final ObservableList<Contact> data = FXCollections.observableArrayList(
-                new Contact("Jacob", "Smith", "407-332-2632", "jacob.smith@example.com","jajaja"),
-                new Contact("Isabella", "Johnson", "407-555- 5555", "isabella.johnson@example.com", "que loco"),
-                new Contact("Ethan", "Williams", "407-333-3333", "ethan.williams@example.com", "ese no es de aqui"),
-                new Contact("Emma", "Jones", "407-444-4444", "emma.jones@example.com", "nickname Kiko"),
-                new Contact("Michael", "Brown", "503-888-9999","michael.brown@example.com"," la la la")
-        );
-
-
-     //Test data using ContactData class
-        contactData.addContact(new Contact("Jacob", "Smith", "407-332-2632", "jacob.smith@example.com","ja ja ja"));
-        contactData.addContact(new Contact("Isabella", "Johnson", "407-555- 5555", "isabella.johnson@example.com", "que loco"));
-        contactData.addContact(new Contact("Ethan", "Williams", "407-333-3333", "ethan.williams@example.com", "ese no es de aqui"));
-        contactData.addContact(new Contact("Emma", "Jones", "407-444-4444", "emma.jones@example.com", "nickname Kiko"));
-        contactData.addContact(new Contact("Michael", "Brown", "503-888-9999","michael.brown@example.com"," la la la"));
-
-        //contactData.loadContacts();
-*/
-
-
-        // setCellValueFactory is used to populate individual cells in the column.
-        // PropertyValueFactory specifies the object class that populates the table, and the object class for the column.
-        // and the property to be obtained, for example Contact.getFirstName() returns String.
-        // obtained from the properties types, example TableColumn<Contact, String> firstNameColumn;
+        /* Associate Data with the Table Columns,
+         * setCellValueFactory is used to specify a cell factory for each column and associate the data with the column.
+         * PropertyValueFactory specifies the object class and the properties references ("first name") for the
+         * corresponding methods. It requires the Contact Class to use SimpleStringProperty to be able to find the
+         * property references.
+         * Note:
+         * Type <S,T> comes from the TableColumn declaration, example TableColumn<Contact, String> firstNameColumn;
+         * */
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
@@ -121,18 +105,27 @@ public class Controller {
             //show dialog
             Optional<ButtonType> result = dialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                //get controller for the dialog
+                //get add contact dialog controller to add the contact
                 AddContactDialogController addContactDialogController = fxmlLoader.getController();
                 if (addContactDialogController.addContact()) {
                     loop = false;
-                }
+                } //if contact was not added, returned false, loop is true.
             } else if (result.isPresent() && result.get() == ButtonType.CANCEL) {
                 loop = false;
             }
-
         }
     }
 
 
+    public void handleMenuClose() {
+        /* Causes to terminate, will call the Application stop method.
+         *  Note: Data will be saved, stop() method was override in Main class.
+         *  */
+        Platform.exit();
+    }
+
+    public void handleContextMenuAdd() {
+        handleMenuAdd();
+    }
 }
 
