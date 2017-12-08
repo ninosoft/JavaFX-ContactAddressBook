@@ -41,6 +41,7 @@
             <TableColumn fx:id="emailColumn" prefWidth="230" text="eMail"/>
             <TableColumn fx:id="notesColumn" prefWidth="250" text="Notes"/>
         </columns>
+
         <contextMenu>
             <ContextMenu>
                 <items>
@@ -51,6 +52,7 @@
                 </items>
             </ContextMenu>
         </contextMenu>
+
     </TableView>
 
 </VBox>

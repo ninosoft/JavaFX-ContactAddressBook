@@ -91,28 +91,44 @@ public class ContactData {
                     if (event.asStartElement().getName().getLocalPart()
                             .equals(LAST_NAME)) {
                         event = eventReader.nextEvent();
-                        contact.setLastName(event.asCharacters().getData());
+                        if (event.isCharacters()) {
+                            contact.setLastName(event.asCharacters().getData());
+                        } else {
+                            contact.setLastName("");
+                        }
                         continue;
                     }
 
                     if (event.asStartElement().getName().getLocalPart()
                             .equals(PHONE_NUMBER)) {
                         event = eventReader.nextEvent();
-                        contact.setPhoneNumber(event.asCharacters().getData());
+                        if (event.isCharacters()) {
+                            contact.setPhoneNumber(event.asCharacters().getData());
+                        } else {
+                            contact.setPhoneNumber("");
+                        }
                         continue;
                     }
 
                     if (event.asStartElement().getName().getLocalPart()
                             .equals(EMAIL)) {
                         event = eventReader.nextEvent();
-                        contact.setEmail(event.asCharacters().getData());
+                        if (event.isCharacters()) {
+                            contact.setEmail(event.asCharacters().getData());
+                        } else {
+                            contact.setEmail("");
+                        }
                         continue;
                     }
 
                     if (event.asStartElement().getName().getLocalPart()
                             .equals(NOTES)) {
                         event = eventReader.nextEvent();
-                        contact.setNotes(event.asCharacters().getData());
+                        if (event.isCharacters()) {
+                            contact.setNotes(event.asCharacters().getData());
+                        } else {
+                            contact.setNotes("");
+                        }
                         continue;
                     }
                 }

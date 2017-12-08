@@ -11,6 +11,7 @@ import mycontacts.datamodel.Contact;
 import mycontacts.datamodel.ContactData;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -33,6 +34,7 @@ public class Controller {
 
     private ContactData contactData = ContactData.getInstance();
 
+
     public void initialize() {
 
 
@@ -50,11 +52,16 @@ public class Controller {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         notesColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
-        //get the data
+        //set contact data
         contactsTableView.setItems(contactData.getContacts());
+
+        //Added initial sort criteria using the firstNameColumn.
+        //Adding a sortedList wil cause problems for the tableView sort.
+        contactsTableView.getSortOrder().add(firstNameColumn);
 
         //select first item (first row)
         contactsTableView.getSelectionModel().selectFirst();
+
 
     } //End initialization
 
@@ -79,10 +86,12 @@ public class Controller {
     public void handleMenuAdd() {
         //defining custom dialog
         Dialog<ButtonType> dialog = new Dialog<>();
+
         //Specifies the owner Window or null for a top-level, unowned stage.
         dialog.initOwner(mainLayoutVBox.getScene().getWindow());
         dialog.setTitle("Add New Contact");
         dialog.setHeaderText("Please add the new contact information.");
+
         //Set the dialog fXML layout  file location.
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("add_contact_dialog.fxml"));
@@ -108,6 +117,11 @@ public class Controller {
                 //get add contact dialog controller to add the contact
                 AddContactDialogController addContactDialogController = fxmlLoader.getController();
                 if (addContactDialogController.addContact()) {
+                    //contact was added, select the last contact and scroll to new contact
+                    List<Contact> contacts = contactData.getContacts();
+                    Contact lastContact = contacts.get(contacts.size() - 1);
+                    contactsTableView.getSelectionModel().select(lastContact);
+                    contactsTableView.scrollTo(lastContact);
                     loop = false;
                 } //if contact was not added, returned false, loop is true.
             } else if (result.isPresent() && result.get() == ButtonType.CANCEL) {

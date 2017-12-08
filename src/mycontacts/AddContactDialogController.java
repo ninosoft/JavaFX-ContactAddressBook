@@ -33,9 +33,10 @@ public class AddContactDialogController {
                 alert.showAndWait();
                 return false;
             } else {
-                //contact name is not empty
-                contactData.addContact(new Contact(firstNameTextField.getText(), lastNameTextField.getText(),
-                        phoneNumberTextField.getText(), emailTextField.getText(), notesTextField.getText()));
+                //contact name is not empty, other fields can be empty.
+                contact = new Contact(firstNameTextField.getText(), lastNameTextField.getText(),
+                        phoneNumberTextField.getText(), emailTextField.getText(), notesTextField.getText());
+                contactData.addContact(contact);
                 return true;
             }
         } else {
