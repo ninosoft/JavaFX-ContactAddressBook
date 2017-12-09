@@ -1,66 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <contacts>
 <contact>
-	<first_name>Michael</first_name>
-	<last_name>Brown</last_name>
-	<phone_number>503-888-9999</phone_number>
-	<email>michael.brown@example.com</email>
-	<notes> la la la</notes>
+	<first_name>Antony</first_name>
+	<last_name>Kilgore</last_name>
+	<phone_number>324</phone_number>
+	<email>@here</email>
+	<notes>loco</notes>
 </contact>
 <contact>
-	<first_name>Cameron</first_name>
-	<last_name>Diaz</last_name>
+	<first_name>Kiko</first_name>
+	<last_name>jones</last_name>
+	<phone_number>589</phone_number>
+	<email>mail.com</email>
+	<notes>more notes</notes>
+</contact>
+<contact>
+	<first_name>ñito</first_name>
+	<last_name>Sepulveda</last_name>
+	<phone_number>444</phone_number>
+	<email>ñito@coqui.com</email>
+	<notes>neta</notes>
+</contact>
+<contact>
+	<first_name>papo</first_name>
+	<last_name>Ramos</last_name>
+	<phone_number>453</phone_number>
+	<email>gjggj</email>
+	<notes>wewe</notes>
+</contact>
+<contact>
+	<first_name>Rose</first_name>
+	<last_name>lalolelolay</last_name>
 	<phone_number></phone_number>
 	<email></email>
 	<notes></notes>
 </contact>
 <contact>
-	<first_name>Isabella</first_name>
-	<last_name>Johnson</last_name>
-	<phone_number>407-555- 5555</phone_number>
-	<email>isabella.johnson@example.com</email>
-	<notes>que loco</notes>
+	<first_name>Tom </first_name>
+	<last_name>Buba</last_name>
+	<phone_number>407</phone_number>
+	<email>sdhdh</email>
+	<notes>sdasaaa</notes>
 </contact>
 <contact>
-	<first_name>lao</first_name>
-	<last_name>lalolao</last_name>
-	<phone_number>111-222-3323</phone_number>
-	<email></email>
-	<notes></notes>
+	<first_name>Tom </first_name>
+	<last_name>Cruise</last_name>
+	<phone_number>6589</phone_number>
+	<email>mail</email>
+	<notes>the note</notes>
 </contact>
 <contact>
-	<first_name>Je</first_name>
-	<last_name>Lopez</last_name>
+	<first_name>zorro</first_name>
+	<last_name></last_name>
 	<phone_number></phone_number>
 	<email></email>
 	<notes></notes>
-</contact>
-<contact>
-	<first_name>Christian</first_name>
-	<last_name>Rodriguez</last_name>
-	<phone_number>555-555-5555</phone_number>
-	<email>Chris@here.com</email>
-	<notes>yo lo se...</notes>
-</contact>
-<contact>
-	<first_name>Waldo</first_name>
-	<last_name>Rodriguez</last_name>
-	<phone_number>123-456-7891</phone_number>
-	<email>yoyo@yoyoyo.com</email>
-	<notes>The best!</notes>
-</contact>
-<contact>
-	<first_name>Jacob</first_name>
-	<last_name>Smith</last_name>
-	<phone_number>407-332-2632</phone_number>
-	<email>jacob.smith@example.com</email>
-	<notes>jajaja</notes>
-</contact>
-<contact>
-	<first_name>Ethan</first_name>
-	<last_name>Williams</last_name>
-	<phone_number>407-333-3333</phone_number>
-	<email>ethan.williams@example.com</email>
-	<notes>tin tin</notes>
 </contact>
 </contacts>

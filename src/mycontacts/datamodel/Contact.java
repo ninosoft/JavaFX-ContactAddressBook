@@ -4,17 +4,18 @@ import javafx.beans.property.SimpleStringProperty;
 
 
 public class Contact {
-    // SimpleStringProperty are required so that the Contact class fields work with the Cell factories.
-    // Cell factories are implemented by using the PropertyValueFactory class, which uses the firstName, lastName
-    // etc  properties of the table columns as references to the corresponding methods of the Person class.
+    // SimpleStringProperty, implementation of a Property wrapping a String value.
+    // Is required so that the Contact class fields work with the Cell factories.
+    // Cell factories are implemented by using the PropertyValueFactory class, which uses the properties (firstName,
+    // lastName, etc) of the table columns as references to the corresponding methods of the Person class.
     private final SimpleStringProperty firstName;
     private final SimpleStringProperty lastName;
     private final SimpleStringProperty phoneNumber;
     private final SimpleStringProperty email;
     private final SimpleStringProperty notes;
 
-    //Constructor,  package-private (no explicit modifier).
-    Contact() {
+    //Constructor
+    public Contact() {
         this.firstName = new SimpleStringProperty("");
         this.lastName = new SimpleStringProperty("");
         this.email = new SimpleStringProperty("");
@@ -31,13 +32,13 @@ public class Contact {
         this.notes = new SimpleStringProperty(notes);
     }
 
-    public String getFirstName() {
+ public String getFirstName() {
         return firstName.get();
     }
 
-    /*public SimpleStringProperty firstNameProperty() {
+    public SimpleStringProperty firstNameProperty() {
         return firstName;
-    }*/
+    }
 
 
     public void setFirstName(String firstName) {
@@ -48,9 +49,9 @@ public class Contact {
         return lastName.get();
     }
 
-    /*public SimpleStringProperty lastNameProperty() {
+    public SimpleStringProperty lastNameProperty() {
         return lastName;
-    }*/
+    }
 
     public void setLastName(String lastName) {
         this.lastName.set(lastName);
@@ -60,9 +61,9 @@ public class Contact {
         return phoneNumber.get();
     }
 
-    /*public SimpleStringProperty phoneNumberProperty() {
+    public SimpleStringProperty phoneNumberProperty() {
         return phoneNumber;
-    }*/
+    }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber.set(phoneNumber);
@@ -72,9 +73,9 @@ public class Contact {
         return email.get();
     }
 
-    /*public SimpleStringProperty emailProperty() {
+    public SimpleStringProperty emailProperty() {
         return email;
-    }*/
+    }
 
     public void setEmail(String email) {
         this.email.set(email);
@@ -84,9 +85,9 @@ public class Contact {
         return notes.get();
     }
 
-    /*public SimpleStringProperty notesProperty() {
+    public SimpleStringProperty notesProperty() {
         return notes;
-    }*/
+    }
 
     public void setNotes(String notes) {
         this.notes.set(notes);

@@ -1,17 +1,18 @@
 package mycontacts;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 
 import mycontacts.datamodel.Contact;
 import mycontacts.datamodel.ContactData;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -32,11 +33,19 @@ public class Controller {
     @FXML
     private TableColumn<Contact, String> notesColumn;
 
-    private ContactData contactData = ContactData.getInstance();
-
+    private ContactData contactData;
+    private Dialog<ButtonType> dialog;
+    private FXMLLoader fxmlLoader;
 
     public void initialize() {
+        // Create ContactData instance;
+        contactData = ContactData.getInstance();
 
+        //set contact data
+        contactsTableView.setItems(contactData.getContacts());
+
+        //set selection mode.
+        contactsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         /* Associate Data with the Table Columns,
          * setCellValueFactory is used to specify a cell factory for each column and associate the data with the column.
@@ -49,23 +58,74 @@ public class Controller {
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        /* This two fields were defined on the fxml file, just to practice...
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        notesColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
+        notesColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));*/
 
-        //set contact data
-        contactsTableView.setItems(contactData.getContacts());
 
-        //Added initial sort criteria using the firstNameColumn.
-        //Adding a sortedList wil cause problems for the tableView sort.
+        // Set Sort Order for initialization
+        // After initialization will use the TableView class built-in capabilities.
+        // Users can alter the order of data by clicking column headers.
+        // Note: Should not use SortedList, it will cause the TableView to be always sorted by the SortedList criteria.
+        emailColumn.setSortable(false);
+        notesColumn.setSortable(false);
+        phoneNumberColumn.setSortable(false);
+        firstNameColumn.setSortType(TableColumn.SortType.ASCENDING); //this is the default, not needed.
         contactsTableView.getSortOrder().add(firstNameColumn);
 
-        //select first item (first row)
+        //Select first item (first row)
         contactsTableView.getSelectionModel().selectFirst();
+
+        //Set cell editing
+        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+       /* TableCell implementation that draws a TextField node inside the cell.
+          By default, the TextFieldTableCell is rendered as a Label when not being edited,
+          and as a TextField when in editing mode.*/
+        firstNameColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Contact, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Contact, String> t) {
+                        (t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setFirstName(t.getNewValue());
+                    }
+                }
+        );
+
+        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastNameColumn.setOnEditCommit(
+                t -> (t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setLastName(t.getNewValue())
+        );
+
+        phoneNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        phoneNumberColumn.setOnEditCommit(
+                t -> (t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setPhoneNumber(t.getNewValue())
+        );
+
+        emailColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        emailColumn.setOnEditCommit(
+                t -> (t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setEmail(t.getNewValue())
+        );
+
+        notesColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        notesColumn.setOnEditCommit(
+                t -> (t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setNotes(t.getNewValue())
+        );
 
 
     } //End initialization
 
 
+    //METHODS
+    @FXML
     public void handleMenuDelete() {
         Contact contact = contactsTableView.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -78,23 +138,66 @@ public class Controller {
         }
     }
 
+    @FXML
     public void handleContextMenuDelete() {
         handleMenuDelete();
     }
 
-
+    @FXML
     public void handleMenuAdd() {
+        setContactDialog("Add New Contact", "Fill in the new contact information.");
+
+        //show dialog
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            //get contact dialog controller
+            ContactDialogController contactDialogController = fxmlLoader.getController();
+            //get the newContact
+            Contact newContact = contactDialogController.getNewContact();
+            //add the new contact to the contact data
+            contactData.addContact(newContact);
+            //save the contacts to the file
+            contactData.saveContacts();
+            //contact was added, select the last contact and scroll to new contact
+            contactsTableView.getSelectionModel().select(newContact);
+            contactsTableView.scrollTo(newContact);
+        }
+    }
+
+    @FXML
+    public void handleMenuEdit() {
+        setContactDialog("Edit Contact", "Edit contact information");
+
+        //select contact to be edited
+        Contact selectedContact = contactsTableView.getSelectionModel().getSelectedItem();
+        //get contact dialog controller
+        ContactDialogController contactDialogController = fxmlLoader.getController();
+        //populate dialog pane with selected contact info.
+        contactDialogController.populateDialogFields(selectedContact);
+        //show dialog
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            //update the contact obj
+            contactDialogController.updateContact(selectedContact);
+            //save the contacts to the file
+            contactData.saveContacts();
+        }
+    }
+
+
+    //setup contact dialog,  helper method
+    private void setContactDialog(String title, String headerText) {
         //defining custom dialog
-        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog = new Dialog<>();
 
         //Specifies the owner Window or null for a top-level, unowned stage.
         dialog.initOwner(mainLayoutVBox.getScene().getWindow());
-        dialog.setTitle("Add New Contact");
-        dialog.setHeaderText("Please add the new contact information.");
+        dialog.setTitle(title);
+        dialog.setHeaderText(headerText);
 
         //Set the dialog fXML layout  file location.
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("add_contact_dialog.fxml"));
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("contact_dialog.fxml"));
 
         //load the dialog fXML layout  file
         try {
@@ -108,29 +211,15 @@ public class Controller {
         //add buttons to the dialog.
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-
-        boolean loop = true;
-        while (loop) {
-            //show dialog
-            Optional<ButtonType> result = dialog.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                //get add contact dialog controller to add the contact
-                AddContactDialogController addContactDialogController = fxmlLoader.getController();
-                if (addContactDialogController.addContact()) {
-                    //contact was added, select the last contact and scroll to new contact
-                    List<Contact> contacts = contactData.getContacts();
-                    Contact lastContact = contacts.get(contacts.size() - 1);
-                    contactsTableView.getSelectionModel().select(lastContact);
-                    contactsTableView.scrollTo(lastContact);
-                    loop = false;
-                } //if contact was not added, returned false, loop is true.
-            } else if (result.isPresent() && result.get() == ButtonType.CANCEL) {
-                loop = false;
-            }
-        }
     }
 
 
+    @FXML
+    public void handleContextMenuAdd() {
+        handleMenuAdd();
+    }
+
+    @FXML
     public void handleMenuClose() {
         /* Causes to terminate, will call the Application stop method.
          *  Note: Data will be saved, stop() method was override in Main class.
@@ -138,8 +227,6 @@ public class Controller {
         Platform.exit();
     }
 
-    public void handleContextMenuAdd() {
-        handleMenuAdd();
-    }
+
 }
 

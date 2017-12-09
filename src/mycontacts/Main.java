@@ -16,6 +16,7 @@ public class Main extends Application {
         primaryStage.setTitle("My Contacts ");
         primaryStage.setScene(new Scene(root, 800, 400));
         primaryStage.show();
+
     }
 
     @Override

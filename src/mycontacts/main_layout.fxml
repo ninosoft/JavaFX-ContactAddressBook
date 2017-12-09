@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -7,48 +8,64 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainLayoutVBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="mycontacts.Controller">
+<!--User Interface-->
 
-    <Label text="Address Book">
+<VBox fx:id="mainLayoutVBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mycontacts.Controller">
+
+    <Label minHeight="32.0" text="Address Book">
         <font>
-            <Font name="System Bold" size="15.0"/>
+            <Font name="System Bold" size="15.0" />
         </font>
+      <VBox.margin>
+         <Insets left="10.0" />
+      </VBox.margin>
     </Label>
+
     <MenuBar>
 
         <Menu text="File">
-            <MenuItem text="Close" onAction="#handleMenuClose"/>
+            <MenuItem onAction="#handleMenuClose" text="Close" />
         </Menu>
         <Menu text="Edit">
-            <MenuItem text="Add" onAction="#handleMenuAdd"/>
-            <MenuItem text="Edit"/>
-            <MenuItem text="Delete" onAction="#handleMenuDelete"/>
+            <MenuItem onAction="#handleMenuAdd" text="Add" />
+            <MenuItem onAction="#handleMenuEdit" text="Edit" />
+            <MenuItem onAction="#handleMenuDelete" text="Delete" />
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" text="About"/>
+        <Menu text="Help">
+            <MenuItem text="About" />
         </Menu>
-
     </MenuBar>
+
     <TableView fx:id="contactsTableView" editable="true">
         <columns>
-            <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name"/>
-            <TableColumn fx:id="lastNameColumn" prefWidth="100" text="Last Name"/>
-            <TableColumn fx:id="phoneNumberColumn" prefWidth="130" text="Phone Number"/>
-            <TableColumn fx:id="emailColumn" prefWidth="230" text="eMail"/>
-            <TableColumn fx:id="notesColumn" prefWidth="250" text="Notes"/>
+            <!-- for alignment Use Enum Constant Summary https://docs.oracle.com/javafx/2/api/javafx/geometry/Pos.html-->
+            <!-- <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" style=" -fx-alignment:center_right;"/>-->
+            <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="100" text="Last Name" />
+            <TableColumn fx:id="phoneNumberColumn" prefWidth="130" text="Phone Number" />
+            <TableColumn fx:id="emailColumn" prefWidth="230" text="eMail">
+                <cellValueFactory>
+                    <PropertyValueFactory property="email" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="notesColumn" prefWidth="250" text="Notes">
+                <cellValueFactory>
+                    <PropertyValueFactory property="notes" />
+                </cellValueFactory>
+            </TableColumn>
         </columns>
 
         <contextMenu>
             <ContextMenu>
                 <items>
-                    <MenuItem text="Delete" onAction="#handleContextMenuDelete"/>
+                    <MenuItem onAction="#handleContextMenuDelete" text="Delete" />
                 </items>
                 <items>
-                    <MenuItem text="Add Contact" onAction="#handleContextMenuAdd"/>
+                    <MenuItem onAction="#handleContextMenuAdd" text="Add Contact" />
                 </items>
             </ContextMenu>
         </contextMenu>
