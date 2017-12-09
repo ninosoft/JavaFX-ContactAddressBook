@@ -1,59 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <contacts>
 <contact>
-	<first_name>Antony</first_name>
-	<last_name>Kilgore</last_name>
-	<phone_number>324</phone_number>
-	<email>@here</email>
-	<notes>loco</notes>
-</contact>
-<contact>
-	<first_name>Kiko</first_name>
-	<last_name>jones</last_name>
-	<phone_number>589</phone_number>
-	<email>mail.com</email>
-	<notes>more notes</notes>
-</contact>
-<contact>
-	<first_name>ñito</first_name>
-	<last_name>Sepulveda</last_name>
-	<phone_number>444</phone_number>
-	<email>ñito@coqui.com</email>
-	<notes>neta</notes>
-</contact>
-<contact>
-	<first_name>papo</first_name>
-	<last_name>Ramos</last_name>
-	<phone_number>453</phone_number>
-	<email>gjggj</email>
-	<notes>wewe</notes>
-</contact>
-<contact>
-	<first_name>Rose</first_name>
-	<last_name>lalolelolay</last_name>
-	<phone_number></phone_number>
-	<email></email>
-	<notes></notes>
-</contact>
-<contact>
-	<first_name>Tom </first_name>
-	<last_name>Buba</last_name>
-	<phone_number>407</phone_number>
-	<email>sdhdh</email>
-	<notes>sdasaaa</notes>
-</contact>
-<contact>
-	<first_name>Tom </first_name>
-	<last_name>Cruise</last_name>
-	<phone_number>6589</phone_number>
+	<first_name>yolo</first_name>
+	<last_name>yalesis</last_name>
+	<phone_number>13456</phone_number>
 	<email>mail</email>
-	<notes>the note</notes>
-</contact>
-<contact>
-	<first_name>zorro</first_name>
-	<last_name></last_name>
-	<phone_number></phone_number>
-	<email></email>
-	<notes></notes>
+	<notes>note</notes>
 </contact>
 </contacts>

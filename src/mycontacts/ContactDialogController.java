@@ -5,7 +5,6 @@ import javafx.scene.control.TextField;
 import mycontacts.datamodel.Contact;
 
 
-
 public class ContactDialogController {
     @FXML
     private TextField firstNameTextField;
@@ -25,20 +24,24 @@ public class ContactDialogController {
     }
 
     public void populateDialogFields(Contact selectedContact) {
-        firstNameTextField.setText(selectedContact.getFirstName());
-        lastNameTextField.setText(selectedContact.getLastName());
-        phoneNumberTextField.setText(selectedContact.getPhoneNumber());
-        emailTextField.setText(selectedContact.getEmail());
-        notesTextField.setText(selectedContact.getNotes());
+        if (selectedContact != null) {
+            firstNameTextField.setText(selectedContact.getFirstName());
+            lastNameTextField.setText(selectedContact.getLastName());
+            phoneNumberTextField.setText(selectedContact.getPhoneNumber());
+            emailTextField.setText(selectedContact.getEmail());
+            notesTextField.setText(selectedContact.getNotes());
+        }
     }
 
 
     public void updateContact(Contact selectedContact) {
-        selectedContact.setFirstName(firstNameTextField.getText());
-        selectedContact.setLastName(lastNameTextField.getText());
-        selectedContact.setPhoneNumber(phoneNumberTextField.getText());
-        selectedContact.setEmail(emailTextField.getText());
-        selectedContact.setNotes(notesTextField.getText());
+        if (selectedContact != null) {
+            selectedContact.setFirstName(firstNameTextField.getText());
+            selectedContact.setLastName(lastNameTextField.getText());
+            selectedContact.setPhoneNumber(phoneNumberTextField.getText());
+            selectedContact.setEmail(emailTextField.getText());
+            selectedContact.setNotes(notesTextField.getText());
+        }
     }
 
 

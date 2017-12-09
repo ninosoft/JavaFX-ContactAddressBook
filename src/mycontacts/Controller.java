@@ -127,14 +127,16 @@ public class Controller {
     //METHODS
     @FXML
     public void handleMenuDelete() {
-        Contact contact = contactsTableView.getSelectionModel().getSelectedItem();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Deleting Contact");
-        alert.setHeaderText("Are you sure you want to delete contact: " + contact.getFirstName() + " "
-                + contact.getLastName());
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            contactData.deleteContact(contact);
+        Contact selectedContact = contactsTableView.getSelectionModel().getSelectedItem();
+        if (selectedContact != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Deleting Contact");
+            alert.setHeaderText("Are you sure you want to delete contact: " + selectedContact.getFirstName() + " "
+                    + selectedContact.getLastName());
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                contactData.deleteContact(selectedContact);
+            }
         }
     }
 
@@ -170,17 +172,19 @@ public class Controller {
 
         //select contact to be edited
         Contact selectedContact = contactsTableView.getSelectionModel().getSelectedItem();
-        //get contact dialog controller
-        ContactDialogController contactDialogController = fxmlLoader.getController();
-        //populate dialog pane with selected contact info.
-        contactDialogController.populateDialogFields(selectedContact);
-        //show dialog
-        Optional<ButtonType> result = dialog.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            //update the contact obj
-            contactDialogController.updateContact(selectedContact);
-            //save the contacts to the file
-            contactData.saveContacts();
+        if (selectedContact != null) {
+            //get contact dialog controller
+            ContactDialogController contactDialogController = fxmlLoader.getController();
+            //populate dialog pane with selected contact info.
+            contactDialogController.populateDialogFields(selectedContact);
+            //show dialog
+            Optional<ButtonType> result = dialog.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                //update the contact obj
+                contactDialogController.updateContact(selectedContact);
+                //save the contacts to the file
+                contactData.saveContacts();
+            }
         }
     }
 
