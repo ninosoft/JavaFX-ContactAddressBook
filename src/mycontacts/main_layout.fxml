@@ -9,67 +9,75 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <!--User Interface-->
 
-<VBox fx:id="mainLayoutVBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mycontacts.Controller">
+<BorderPane fx:id="mainLayout" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mycontacts.Controller">
+    <top>
+        <VBox>
+            <Label minHeight="32.0" text="Contacts">
+                <font>
+                    <Font name="System Bold" size="15.0" />
+                </font>
+            <VBox.margin>
+               <Insets left="10.0" />
+            </VBox.margin>
 
-    <Label minHeight="32.0" text="Address Book">
-        <font>
-            <Font name="System Bold" size="15.0" />
-        </font>
-      <VBox.margin>
-         <Insets left="10.0" />
-      </VBox.margin>
-    </Label>
+            </Label>
 
-    <MenuBar>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem onAction="#handleMenuClose" text="Close" />
+                </Menu>
+                <Menu text="Edit">
+                    <MenuItem onAction="#handleMenuAdd" text="Add" />
+                    <MenuItem onAction="#handleMenuEdit" text="Edit" />
+                    <MenuItem onAction="#handleMenuDelete" text="Delete" />
+                </Menu>
+                <Menu text="Help">
+                    <MenuItem text="About" />
+                </Menu>
+            </MenuBar>
 
-        <Menu text="File">
-            <MenuItem onAction="#handleMenuClose" text="Close" />
-        </Menu>
-        <Menu text="Edit">
-            <MenuItem onAction="#handleMenuAdd" text="Add" />
-            <MenuItem onAction="#handleMenuEdit" text="Edit" />
-            <MenuItem onAction="#handleMenuDelete" text="Delete" />
-        </Menu>
-        <Menu text="Help">
-            <MenuItem text="About" />
-        </Menu>
-    </MenuBar>
+        </VBox>
+    </top>
+    <center>
+        <TableView fx:id="contactsTableView" editable="true">
+            <!-- <columnResizePolicy>
+                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+             </columnResizePolicy>-->
+            <columns>
+                <!-- for alignment Use Enum Constant Summary https://docs.oracle.com/javafx/2/api/javafx/geometry/Pos.html-->
+                <!-- <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" style=" -fx-alignment:center_right;"/>-->
+                <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="100" text="Last Name" />
+                <TableColumn fx:id="phoneNumberColumn" prefWidth="130" text="Phone Number" />
+                <TableColumn fx:id="emailColumn" prefWidth="230" text="eMail">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="email" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="notesColumn" prefWidth="250" text="Notes">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="notes" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
 
-    <TableView fx:id="contactsTableView" editable="true">
-        <columns>
-            <!-- for alignment Use Enum Constant Summary https://docs.oracle.com/javafx/2/api/javafx/geometry/Pos.html-->
-            <!-- <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" style=" -fx-alignment:center_right;"/>-->
-            <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" />
-            <TableColumn fx:id="lastNameColumn" prefWidth="100" text="Last Name" />
-            <TableColumn fx:id="phoneNumberColumn" prefWidth="130" text="Phone Number" />
-            <TableColumn fx:id="emailColumn" prefWidth="230" text="eMail">
-                <cellValueFactory>
-                    <PropertyValueFactory property="email" />
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn fx:id="notesColumn" prefWidth="250" text="Notes">
-                <cellValueFactory>
-                    <PropertyValueFactory property="notes" />
-                </cellValueFactory>
-            </TableColumn>
-        </columns>
+            <contextMenu>
+                <ContextMenu>
+                    <items>
+                        <MenuItem onAction="#handleContextMenuDelete" text="Delete" />
+                    </items>
+                    <items>
+                        <MenuItem onAction="#handleContextMenuAdd" text="Add Contact" />
+                    </items>
+                </ContextMenu>
+            </contextMenu>
 
-        <contextMenu>
-            <ContextMenu>
-                <items>
-                    <MenuItem onAction="#handleContextMenuDelete" text="Delete" />
-                </items>
-                <items>
-                    <MenuItem onAction="#handleContextMenuAdd" text="Add Contact" />
-                </items>
-            </ContextMenu>
-        </contextMenu>
-
-    </TableView>
-
-</VBox>
+        </TableView>
+    </center>
+</BorderPane>

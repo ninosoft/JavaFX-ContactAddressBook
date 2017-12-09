@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 
 import mycontacts.datamodel.Contact;
 import mycontacts.datamodel.ContactData;
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class Controller {
 
     @FXML
-    private VBox mainLayoutVBox;
+    private BorderPane mainLayout;
     @FXML
     private TableView<Contact> contactsTableView;
     @FXML
@@ -43,6 +43,9 @@ public class Controller {
 
         //set contact data
         contactsTableView.setItems(contactData.getContacts());
+
+        //Set TableView column resize policy, to allow the columns to grow when the window is modified.
+        contactsTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         //set selection mode.
         contactsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -136,6 +139,7 @@ public class Controller {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 contactData.deleteContact(selectedContact);
+                contactData.saveContacts();
             }
         }
     }
@@ -195,7 +199,7 @@ public class Controller {
         dialog = new Dialog<>();
 
         //Specifies the owner Window or null for a top-level, unowned stage.
-        dialog.initOwner(mainLayoutVBox.getScene().getWindow());
+        dialog.initOwner(mainLayout.getScene().getWindow());
         dialog.setTitle(title);
         dialog.setHeaderText(headerText);
 

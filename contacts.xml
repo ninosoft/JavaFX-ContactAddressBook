@@ -1,10 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <contacts>
 <contact>
-	<first_name>yolo</first_name>
-	<last_name>yalesis</last_name>
-	<phone_number>13456</phone_number>
-	<email>mail</email>
-	<notes>note</notes>
+	<first_name>Christian</first_name>
+	<last_name>Rodriguez</last_name>
+	<phone_number>555-555-5555</phone_number>
+	<email>Chris@here.com</email>
+	<notes>yo lo se...lllllllllllllllllllllllllllllllllllllllllllll</notes>
+</contact>
+<contact>
+	<first_name>Emma</first_name>
+	<last_name>Jones</last_name>
+	<phone_number>407-444-4444</phone_number>
+	<email>emma.jones@example.com</email>
+	<notes>Crazy</notes>
+</contact>
+<contact>
+	<first_name>Ethan</first_name>
+	<last_name>Williams</last_name>
+	<phone_number>407-333-3333</phone_number>
+	<email>ethan.williams@example.com</email>
+	<notes>tin tin</notes>
+</contact>
+<contact>
+	<first_name>Isabella</first_name>
+	<last_name>Johnson</last_name>
+	<phone_number>407-555- 5555</phone_number>
+	<email>isabella.johnson@example.com</email>
+	<notes>que loco</notes>
+</contact>
+<contact>
+	<first_name>Jacob</first_name>
+	<last_name>Smith</last_name>
+	<phone_number>407-332-2632</phone_number>
+	<email>jacob.smith@example.com</email>
+	<notes>jajaja</notes>
+</contact>
+<contact>
+	<first_name>Lalo</first_name>
+	<last_name></last_name>
+	<phone_number></phone_number>
+	<email></email>
+	<notes>Note the note note </notes>
+</contact>
+<contact>
+	<first_name>lao</first_name>
+	<last_name>lalolao</last_name>
+	<phone_number>111-222-3323</phone_number>
+	<email></email>
+	<notes></notes>
+</contact>
+<contact>
+	<first_name>Michael</first_name>
+	<last_name>Brown</last_name>
+	<phone_number>503-888-9999</phone_number>
+	<email>michael.brown@example.com</email>
+	<notes> la la la</notes>
+</contact>
+<contact>
+	<first_name>Waldo</first_name>
+	<last_name>Rodriguez</last_name>
+	<phone_number>123-456-7891</phone_number>
+	<email>yoyo@yoyoyo.com</email>
+	<notes>The best!</notes>
+</contact>
+<contact>
+	<first_name>yayo</first_name>
+	<last_name></last_name>
+	<phone_number></phone_number>
+	<email></email>
+	<notes></notes>
 </contact>
 </contacts>
