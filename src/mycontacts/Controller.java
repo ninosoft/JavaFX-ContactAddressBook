@@ -45,7 +45,7 @@ public class Controller {
         contactsTableView.setItems(contactData.getContacts());
 
         //Set TableView column resize policy, to allow the columns to grow when the window is modified.
-        contactsTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        //contactsTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         //set selection mode.
         contactsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

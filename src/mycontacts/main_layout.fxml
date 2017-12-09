@@ -15,9 +15,9 @@
 
 <!--User Interface-->
 
-<BorderPane fx:id="mainLayout" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mycontacts.Controller">
+<BorderPane fx:id="mainLayout" style="-fx-background-color: chocolate;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mycontacts.Controller">
     <top>
-        <VBox>
+        <VBox style="-fx-background-color: chocolate;">
             <Label minHeight="32.0" text="Contacts">
                 <font>
                     <Font name="System Bold" size="15.0" />
@@ -55,12 +55,12 @@
                 <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" />
                 <TableColumn fx:id="lastNameColumn" prefWidth="100" text="Last Name" />
                 <TableColumn fx:id="phoneNumberColumn" prefWidth="130" text="Phone Number" />
-                <TableColumn fx:id="emailColumn" prefWidth="230" text="eMail">
+                <TableColumn fx:id="emailColumn" prefWidth="250.0" text="eMail">
                     <cellValueFactory>
                         <PropertyValueFactory property="email" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="notesColumn" prefWidth="250" text="Notes">
+                <TableColumn fx:id="notesColumn" prefWidth="300.0" text="Notes">
                     <cellValueFactory>
                         <PropertyValueFactory property="notes" />
                     </cellValueFactory>
